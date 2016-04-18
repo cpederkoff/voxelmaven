@@ -17,6 +17,6 @@ cd voxelmaven
 mvn install 
 ```
 ##Getting started
-Please see the wiki for more help on making your first project using voxelmaven. 
+Please see the [wiki](https://github.com/rcpedersen/voxelmaven/wiki/Getting-Started) for more help on making your first project using voxelmaven. 
 ##Credits
 Voxelmaven depends on the fabulous AbFab3D library for reading STL files, converting Voxels into triangles, and exporting meshes to STL files. 
