@@ -6,13 +6,13 @@ import java.io.IOException;
 
 import javax.vecmath.Point3d;
 
+import shape.Shape;
 import abfab3d.grid.ArrayAttributeGridByte;
 import abfab3d.grid.AttributeGrid;
 import abfab3d.io.output.MeshMakerMT;
 import abfab3d.io.output.STLWriter;
 import abfab3d.util.MathUtil;
 import abfab3d.util.TriangleCounter;
-import shape.Shape;
 
 public class MeshMaker {
     private Shape shape;
@@ -43,11 +43,12 @@ public class MeshMaker {
         int nz = (int) Math.round((bounds[5] - bounds[4]));
         System.out.println(nx + " " + ny + " " + nz);
         AttributeGrid grid = new ArrayAttributeGridByte(nx, ny, nz, 1, 1);
-        double[] mmbounds = new double[] { bounds[0] * MM, bounds[1] * MM, bounds[2] * MM, bounds[3] * MM,
-                bounds[4] * MM, bounds[5] * MM };
+        double[] mmbounds = new double[] { bounds[0] * MM, bounds[1] * MM,
+                bounds[2] * MM, bounds[3] * MM, bounds[4] * MM, bounds[5] * MM };
         grid.setGridBounds(mmbounds);
         for (int z = (int) bounds[4]; z < (int) bounds[5]; z++) {
-            System.out.println((z - bounds[4]) / (bounds[5] - bounds[4]) * 100 + "%");
+            System.out.println((z - bounds[4]) / (bounds[5] - bounds[4]) * 100
+                    + "%");
             for (int y = (int) bounds[2]; y < (int) bounds[3]; y++) {
                 for (int x = (int) bounds[0]; x < (int) bounds[1]; x += 64) {
                     long vals = shape.fastInShape(new Point3d(x, y, z));
@@ -57,7 +58,8 @@ public class MeshMaker {
                             long top = (vals & 0x8000000000000000L);
                             top = top >> 63;
                             top = top & 0x1L;
-                            grid.setState(x + i - (int) bounds[0], y - (int) bounds[2], z - (int) bounds[4],
+                            grid.setState(x + i - (int) bounds[0], y
+                                    - (int) bounds[2], z - (int) bounds[4],
                                     (byte) top);
                         }
                         vals = vals << 1;
