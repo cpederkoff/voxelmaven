@@ -26,8 +26,6 @@ public class ImageRotated extends Shape {
         int rgb = img.getRGB((int) distFromY, (int) point.y);
         Color color = new Color(rgb);
         double greyscale = (color.getRed() + color.getGreen() + color.getBlue()) / 3;
-        // if (greyscale != 0)
-        // System.out.println(greyscale);
         greyscale = 255 - greyscale;
         // now black = 255; white = 0
         if (greyscale == 255) {
