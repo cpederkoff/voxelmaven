@@ -18,9 +18,16 @@ public class MeshMaker {
     private Shape shape;
     double MM = 0.001;
     boolean test = true;
+    private double size;
+
+    public MeshMaker(Shape shape, double size) {
+        this.shape = shape;
+        this.size = size;
+    }
 
     public MeshMaker(Shape shape) {
         this.shape = shape;
+        this.size = 0;
     }
 
     public void writeMesh(String file) throws IOException {
@@ -42,6 +49,11 @@ public class MeshMaker {
         int ny = (int) Math.round((bounds[3] - bounds[2]));
         int nz = (int) Math.round((bounds[5] - bounds[4]));
         System.out.println(nx + " " + ny + " " + nz);
+        if (size != 0) {
+            double voxelSize = Math.max(nx, Math.max(ny, nz)) / size;
+            MM /= voxelSize;
+        }
+
         AttributeGrid grid = new ArrayAttributeGridByte(nx, ny, nz, 1, 1);
         double[] mmbounds = new double[] { bounds[0] * MM, bounds[1] * MM,
                 bounds[2] * MM, bounds[3] * MM, bounds[4] * MM, bounds[5] * MM };

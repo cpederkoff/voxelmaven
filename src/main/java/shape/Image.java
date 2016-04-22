@@ -23,8 +23,8 @@ public class Image extends Shape {
                 && point.y < img.getHeight()) {
             int rgb = img.getRGB((int) point.x, (int) point.y);
             Color color = new Color(rgb);
-            return (color.getRed() < 128 && color.getBlue() < 128 && color
-                    .getGreen() < 128);
+            return (color.getRed() > 128 || color.getBlue() > 128 || color
+                    .getGreen() > 128);
         }
         return false;
     }

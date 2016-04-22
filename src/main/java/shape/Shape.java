@@ -122,6 +122,14 @@ public abstract class Shape {
         };
     }
 
+    public Shape scaleToSize(final double size) {
+        double[] bounds = this.getBounds();
+        double b = Math.max(
+                Math.max(bounds[1] - bounds[0], bounds[3] - bounds[2]),
+                bounds[5] - bounds[4]);
+        return scale(size / b);
+    }
+
     public Shape scale(final double s) {
         return scale(s, s, s);
     }
@@ -203,6 +211,7 @@ public abstract class Shape {
     }
 
     public Shape rotate(double x, double y, double z, double angle) {
+
         angle = angle * (2 * Math.PI) / 360;
         final Rotation rotation = new Rotation(new Vector3D(x, y, z), angle);
         final Shape self = this;
@@ -218,7 +227,7 @@ public abstract class Shape {
 
             @Override
             public double[] getBounds() {
-                double xmin = 0, xmax = 0, ymin = 0, ymax = 0, zmin = 0, zmax = 0;
+                double xmin = Integer.MAX_VALUE, xmax = Integer.MIN_VALUE, ymin = Integer.MAX_VALUE, ymax = Integer.MIN_VALUE, zmin = Integer.MAX_VALUE, zmax = Integer.MIN_VALUE;
                 double[] bounds = self.getBounds();
                 for (double x : new double[] { bounds[0], bounds[1] }) {
                     for (double y : new double[] { bounds[2], bounds[3] }) {
