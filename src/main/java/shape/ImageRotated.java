@@ -10,8 +10,10 @@ import javax.vecmath.Point3d;
 
 public class ImageRotated extends Shape {
     private BufferedImage img;
+    private int holes;
 
-    public ImageRotated(String path) throws IOException {
+    public ImageRotated(String path, int holes) throws IOException {
+        this.holes = holes;
         img = ImageIO.read(new File(path));
     }
 
@@ -35,7 +37,7 @@ public class ImageRotated extends Shape {
             return false;
         }
         double angleDeg = ((Math.atan2(point.z, point.x) * 180 / Math.PI) + 360) % 360;
-        int period = 30;
+        int period = 360 / holes;
         double cycle = angleDeg % period;
         if (cycle / period < greyscale / 255) {
             return true;

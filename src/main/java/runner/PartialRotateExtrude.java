@@ -17,6 +17,8 @@ public class PartialRotateExtrude {
     String outputFile;
     @Parameter(names = "-detail", description = "Amount of detail to compute. (Default 300)")
     int detail = 300;
+    @Parameter(names = "-holes", description = "Number of holes to make when rotating non-black pixels (default 12)")
+    int holes = 12;
 
     public static void main(String[] args) throws IOException {
         PartialRotateExtrude rotateExtrude = new PartialRotateExtrude();
@@ -25,7 +27,8 @@ public class PartialRotateExtrude {
     }
 
     public void run() throws IOException {
-        Shape extrusion = new ImageRotated(inputFile).scaleToSize(detail);
+        Shape extrusion = new ImageRotated(inputFile, holes)
+                .scaleToSize(detail);
         MeshMaker maker = new MeshMaker(extrusion, 100);
         maker.writeMesh(outputFile);
     }
