@@ -11,6 +11,7 @@ import abfab3d.grid.ArrayAttributeGridByte;
 import abfab3d.grid.AttributeGrid;
 import abfab3d.io.output.MeshMakerMT;
 import abfab3d.io.output.STLWriter;
+import abfab3d.mesh.IndexedTriangleSetBuilder;
 import abfab3d.util.MathUtil;
 import abfab3d.util.TriangleCounter;
 
@@ -92,13 +93,16 @@ public class MeshMaker {
         meshmaker.setMaxDecimationError(maxDecimationError);
         meshmaker.setMaxDecimationCount(10);
         meshmaker.setMaxAttributeValue(1);
+        IndexedTriangleSetBuilder triSet = new IndexedTriangleSetBuilder();
+        meshmaker.makeMesh(grid, triSet);
         TriangleCounter counter = new TriangleCounter();
-        meshmaker.makeMesh(grid, counter);
+        triSet.getTriangles(counter);
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         STLWriter stlw = new STLWriter(os, counter.getCount());
-        meshmaker.makeMesh(grid, stlw);
+        triSet.getTriangles(stlw);
         stlw.close();
         System.out.println(System.currentTimeMillis() - start);
         return os.toByteArray();
     }
 }
+
