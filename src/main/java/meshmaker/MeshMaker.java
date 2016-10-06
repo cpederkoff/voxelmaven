@@ -6,14 +6,14 @@ import java.io.IOException;
 
 import javax.vecmath.Point3d;
 
-import shape.Shape;
+import abfab3d.core.AttributeGrid;
+import abfab3d.core.MathUtil;
 import abfab3d.grid.ArrayAttributeGridByte;
-import abfab3d.grid.AttributeGrid;
 import abfab3d.io.output.MeshMakerMT;
 import abfab3d.io.output.STLWriter;
 import abfab3d.mesh.IndexedTriangleSetBuilder;
-import abfab3d.util.MathUtil;
 import abfab3d.util.TriangleCounter;
+import shape.Shape;
 
 public class MeshMaker {
     private Shape shape;

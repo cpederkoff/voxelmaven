@@ -11,9 +11,9 @@ import java.util.List;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
+import abfab3d.core.TriangleCollector;
 import abfab3d.io.input.STLReader;
 import abfab3d.util.BoundingBoxCalculator;
-import abfab3d.util.TriangleCollector;
 
 public class STLShape extends Shape {
     private double[] smallBounds;
